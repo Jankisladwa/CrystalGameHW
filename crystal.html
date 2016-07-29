@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Crystal Game</title>
+   <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="assets/css/style.css">
+ <link rel="stylesheet" href="assets/css/reset.css">
+ <script src="assets/javascript/crystal.js"></script>
+
+</head>
+
+<body>
+<div class="mainSection">
+ <div class="head">
+    <h1>Crystal Collector</h1>
+ </div>
+
+<div class="insructions">
+<p>Game Instructions...</p><br>
+ <p>You will be given a random number at the start of the game.
+   <br>
+    <p>There are four crystals below.</p>
+    <p> By clicking on a crystal you will add a
+    specific amount of points to your total score.</p>
+    <br>
+    <p>You win the game by matching your total score to random number, you lose the game if your total score goes above the random number.</p>
+    <br>
+    <p>The value of each crystal is hidden from you until you click on it.</p>
+    <br>
+    <p>Each time when the game starts, the game will change the values of each crystal.</p>
+ <div class="ranNum">
+   <p><span id="BB">Guess the number:</span><span id="CC">0</span></p>
+ </div>
+
+ <div class="winlos">
+   
+  <p class="wins"> <span>Games you have Won:</span><span id="wins">0</span></p><br>
+  <p class="loss"> <span>Games you have Lost:</span><span id="losses">0</span></p>
+ 
+ </div>
+ </div>
+ <div class="crystals">
+
+   <button id="gem1"><img src="assets/img/crystal.jpg"  alt="gem1" /></button>
+   <button id="gem2"><img src="assets/img/crystal.jpg" alt="gem2" /></button>
+   <button id="gem3"><img src="assets/img/crystal.jpg" alt="gem2" /></button>
+   <button id="gem4"><img src="assets/img/crystal.jpg"   alt="gem4" /></button>
+ 
+ </div>
+
+ <div class="total">
+   <span>Crystal Count:</span>
+   <span id="sum">0</span>
+ </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+ 
+//this adds the gem # to the current score and displays it
+
+function updateGame(gem){
+ currentScore = (currentScore + gem);
+  displayScore();
+  numberCompare();
+  displayWinLoss();
+};
+
+// click functions for the 4 gems
+$("#gem1").click(function() {
+  updateGame(gem1);
+});
+
+$("#gem2").click(function() {
+  updateGame(gem2);
+});
+
+$("#gem3").click(function() {
+  updateGame(gem3);
+});
+
+$("#gem4").click(function() {
+  updateGame(gem4);
+});
+
+console.log( "ready!" );
+
+});//end of document ready function
+
+//this displays the score
+function displayScore(){
+$("#sum").html(currentScore);
+};
+
+function displayWinLoss(){
+ $("#wins").html(win);
+  $("#losses").html(losses);
+};
+
+function displayNumberToReach(){
+  $("#CC").html(numberToReach);
+  
+};
+
+//declares the variables
+var currentScore = 0;
+var win = 0;
+var losses = 0;
+
+var numberToReach
+
+var gem1
+var gem2
+var gem3
+var gem4
+
+//compares the number to reach to the current user score
+function numberCompare(){
+  if (numberToReach == currentScore){
+        win++;
+        startGame();
+  }
+  else if(currentScore > numberToReach){
+    losses++;
+    startGame();
+  }
+}
+
+//the function starts the game
+function startGame() {
+  //generates random number for user to guess and for crystals
+  numberToReach=Math.floor((Math.random() * 102) + 19);
+  
+    gem1=Math.floor(Math.random() * 13);
+    gem2=Math.floor(Math.random() * 13);
+    gem3=Math.floor(Math.random() * 13);
+    gem4=Math.floor(Math.random() * 13);
+  
+  currentScore = 0;
+  displayNumberToReach();
+
+};
+
+
+startGame();
+
+</script>
+
+</body>
+</html>
